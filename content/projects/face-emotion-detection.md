@@ -5,7 +5,7 @@ date: "2025-12-13"
 featured: false
 technologies: ["Python", "ResNet-18", "MediaPipe", "Streamlit", "PyTorch", "FER2013"]
 github: "https://github.com/Faheem8585/face_emotion_detection"
-demo: "https://face-emotion-detection.streamlit.app"
+demo: "https://faheem8585-face-emotion-detection-srcuiapp-zeuap6.streamlit.app"
 image: "/images/projects/face-emotion.png"
 ---
 
