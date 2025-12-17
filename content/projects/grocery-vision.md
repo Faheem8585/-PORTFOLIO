@@ -5,7 +5,7 @@ date: "2025-12-14"
 featured: true
 technologies: ["Python", "YOLOv8", "Streamlit", "Flask", "OpenCV"]
 github: "https://github.com/Faheem8585/grocery_vision_system"
-demo: "https://grocery-vision-system.streamlit.app"
+demo: "https://faheem8585-grocery-vision-system-streamlit-app-khqzag.streamlit.app"
 image: "/images/projects/grocery-vision.png"
 ---
 
