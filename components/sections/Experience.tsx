@@ -7,7 +7,7 @@ export default function Experience() {
             location: "Cottbus, Brandenburg, Germany · On-site",
             type: "Part-time",
             responsibilities: [
-                "Play an integral role in the collection and analysis of egg data from various subjects",
+                "Play an integral role in the collection and analysis of EEG data from various subjects",
                 "Manage the entire data lifecycle, starting with meticulous data collection",
                 "Perform thorough preprocessing to ensure data accuracy and consistency",
                 "Apply various analytical techniques to extract meaningful insights from data",
