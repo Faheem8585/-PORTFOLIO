@@ -120,7 +120,7 @@ export default function SkillsPage() {
                                     {category.skills.map((skill) => (
                                         <span
                                             key={skill.name}
-                                            className="px-3 py-1.5 bg-primary-light text-primary text-sm rounded-md"
+                                            className="skill-badge"
                                         >
                                             {skill.name}
                                         </span>

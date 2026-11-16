@@ -11,7 +11,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     <Link href={`/projects/${project.slug}`}>
       <Card hoverable className="h-full flex flex-col">
         {/* Project Image */}
-        <div className="aspect-video mb-4 rounded-lg overflow-hidden bg-hover-bg">
+        <div className="aspect-video mb-4 rounded-lg overflow-hidden" style={{ background: 'var(--ink-soft)' }}>
           <img
             src={project.image}
             alt={project.title}
@@ -20,15 +20,15 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         </div>
 
         {/* Project Info */}
-        <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-        <p className="text-muted text-sm mb-4 flex-grow">{project.description}</p>
+        <h4 style={{ marginBottom: '0.45rem', lineHeight: 1.3 }}>{project.title}</h4>
+        <p className="text-muted" style={{ fontSize: '0.88rem', marginBottom: '0.9rem', flexGrow: 1 }}>{project.description}</p>
 
         {/* Technologies */}
         <div className="flex flex-wrap gap-2">
           {project.technologies.slice(0, 4).map((tech) => (
             <span
               key={tech}
-              className="px-2 py-1 text-xs bg-primary-light text-primary rounded-md"
+              className="skill-badge" style={{ fontSize: '0.74rem', padding: '0.18rem 0.5rem' }}
             >
               {tech}
             </span>
@@ -41,7 +41,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         </div>
 
         {/* Date */}
-        <p className="text-xs text-muted mt-4">
+        <p className="text-xs text-muted" style={{ marginTop: '0.9rem' }}>
           {new Date(project.date).toLocaleDateString('en-US', { 
             year: 'numeric', 
             month: 'long' 

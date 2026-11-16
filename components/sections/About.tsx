@@ -3,7 +3,6 @@ export default function About() {
         <section id="about" className="section">
             <div className="container">
                 <h2>About</h2>
-                <h4 className="mb-3">Here is a little background</h4>
                 <p style={{ fontSize: '1.05rem', lineHeight: '1.8', color: 'var(--foreground)' }}>
                     Hey 👋 I am an AI Engineer and Data Scientist based in Berlin, with a master&apos;s
                     in Artificial Intelligence from BTU Cottbus-Senftenberg. I work on computer vision
