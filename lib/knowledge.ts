@@ -215,9 +215,15 @@ Model: MONAI UNet, spatial_dims 3, channels 16/32/64/128, strides 2/2/2, two res
 
 The interesting constraint: the volumes are around 35x50x35 voxels, too small for standard sliding-window patching. The pipeline uses foreground-biased 32-cubed patch sampling instead, so patches actually contain the structure being learned. Inference uses sliding windows over the full volume.
 
-Results: anterior Dice 0.8553 and IoU 0.7472; posterior Dice 0.8433 and IoU 0.7291; mean Dice 0.8493 and IoU 0.7382.
+Results:
 
-Important caveat he states openly: the split these numbers come from is also used for early stopping, which makes 0.8493 a validation score rather than a clean test score. A properly held-out test split is the honest next step.
+| Region | Dice | IoU |
+|---|---|---|
+| Anterior | 0.8553 | 0.7472 |
+| Posterior | 0.8433 | 0.7291 |
+| **Mean** | **0.8493** | **0.7382** |
+
+> Important caveat he states openly: the split these numbers come from is also used for early stopping, which makes 0.8493 a validation score rather than a clean test score. A properly held-out test split is the honest next step.
 
 Stack: MONAI, PyTorch, nibabel, FastAPI, Streamlit, Docker, ruff, pytest with over 40 tests.
 
@@ -233,7 +239,15 @@ Architecture: four downsampling blocks of Conv2d, BatchNorm, ReLU and MaxPool; f
 
 The real problem was class imbalance. Roads are 67% of pixels and cars are 0.2%, so an untreated model simply never predicts a car and still scores well. He used weighted cross-entropy with cars at 50x and trees at 15x, plus flips, rotations up to 15 degrees, and brightness and contrast jitter, with early stopping at patience 7.
 
-Results: mean IoU 47.9%, F1 62.2%, pixel accuracy 76.5%. By class: roads 76.9%, vegetation 67.1%, buildings 56.0%, cars 28.2% up from 0%, trees 22.5% up from 0.3%.
+Results: mean IoU 47.9%, F1 62.2%, pixel accuracy 76.5%.
+
+| Class | IoU |
+|---|---|
+| Roads | 76.9% |
+| Vegetation | 67.1% |
+| Buildings | 56.0% |
+| Cars | 28.2% (up from 0%) |
+| Trees | 22.5% (up from 0.3%) |
 
 The headline number is modest, but recovering two classes from effectively zero is the actual result.
 
@@ -261,7 +275,16 @@ github.com/Faheem8585/tender-extractor`,
         keywords: ['jobintel', 'job search', 'matching', 'scoring', 'mcp', 'pydantic', 'scraping', 'applications'],
         content: `A job search assistant that scrapes adverts from LinkedIn, Indeed, StepStone and XING, scores fit, identifies missing skills, and tracks applications.
 
-The scoring is deliberately transparent, not a black box. Skills 50% by weighted Jaccard with required skills counted twice; experience 25% by linear ratio with over-qualification capped rather than rewarded; education 15% by ordinal rank; location 10%, exact 1.0, same country 0.5, remote 1.0. Labels: Strong at 0.75 and above, Good at 0.55, Weak at 0.35, Poor below. Every weight and threshold lives in config.yaml with nothing hardcoded, so the model can be argued with.
+The scoring is deliberately transparent, not a black box.
+
+| Component | Weight | How |
+|---|---|---|
+| Skills | 50% | Weighted Jaccard, required skills counted twice |
+| Experience | 25% | Linear ratio, over-qualification capped not rewarded |
+| Education | 15% | Ordinal rank |
+| Location | 10% | Exact 1.0, same country 0.5, remote 1.0 |
+
+Labels: Strong at 0.75 and above, Good at 0.55, Weak at 0.35, Poor below. Every weight and threshold lives in config.yaml with nothing hardcoded, so the model can be argued with.
 
 Design: Pydantic v2 validation at the boundary so malformed scraped data fails loudly; thread-safe SQLite with an explicit lock; a fuzzy alias table mapping sklearn to scikit-learn and torch to pytorch, plus substring matching; a state machine refusing invalid application status transitions; and four interfaces over one core, namely CLI, FastAPI REST, Streamlit and an MCP server with nine documented tools.
 
@@ -389,9 +412,16 @@ github.com/Faheem8585/cfd-assistant-suite`,
 
 MobileNetV2 with transfer learning then fine-tuning, 224x224 input, roughly 3.5 million parameters, 25 MB on disk. Adam at 1e-4, categorical crossentropy, batch 32, 20 epochs then 10, around 7 hours of training.
 
-Results: training 99.01%, validation 98.55%, test 94.88%, top-3 99.89%.
+Results:
 
-The number that counts is 94.88% on the test set. The validation figure of 98.55% is what the model was tuned against, and quoting it as the headline would overstate performance on genuinely unseen images. The four-point gap between the two is exactly why validation scores should not be trusted as results.
+| Metric | Score |
+|---|---|
+| Training accuracy | 99.01% |
+| Validation accuracy | 98.55% |
+| **Test accuracy** | **94.88%** |
+| Top-3 accuracy | 99.89% |
+
+> The number that counts is 94.88% on the test set. The validation figure of 98.55% is what the model was tuned against, and quoting it as the headline would overstate performance on genuinely unseen images. The four-point gap between the two is exactly why validation scores should not be trusted as results.
 
 Weakest classes are documented with reasons rather than averaged away. Potato-Healthy scores 60.87%, but on only 23 test images, which is too few to conclude anything from.
 
@@ -431,7 +461,19 @@ github.com/Faheem8585/healthcare-bi-project`,
         keywords: ['ai detector', 'text detector', 'ai generated', 'detection', 'sentence', 'ocr', 'signals', 'authenticity'],
         content: `Flags likely AI-generated writing and, more usefully, names the specific sentence that most influenced the verdict.
 
-Seven weighted signals: centroid tightness 23%, semantic drift 22%, hedge frequency 15%, AI-phrase patterns 12%, structural symmetry 12%, linguistic predictability 8%, sentence variance 8%. OCR artefacts add a parallel boost for image inputs.
+Seven weighted signals:
+
+| Signal | Weight |
+|---|---|
+| Centroid tightness | 23% |
+| Semantic drift | 22% |
+| Hedge frequency | 15% |
+| AI-phrase patterns | 12% |
+| Structural symmetry | 12% |
+| Linguistic predictability | 8% |
+| Sentence variance | 8% |
+
+OCR artefacts add a parallel boost for image inputs.
 
 Verdict bands: below 28% likely human, 28 to 52% inconclusive, 52 to 82% likely AI, above 82% deeply synthesised. The inconclusive band exists deliberately, because a detector that always commits is lying about its certainty.
 

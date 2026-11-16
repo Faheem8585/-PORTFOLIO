@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect, useCallback } from 'react';
+import RichMessage from './chat/RichMessage';
 
 interface Message {
     role: 'user' | 'assistant';
@@ -27,72 +28,6 @@ const FOLLOW_UPS = [
     'What does he know about RAG?',
     'Is he a good fit for a computer vision role?',
 ];
-
-/** Minimal, safe markdown: bold, inline code, bullets, paragraphs. No HTML passthrough. */
-function renderText(text: string) {
-    const blocks = text.split(/\n{2,}/);
-
-    const inline = (s: string, keyPrefix: string) => {
-        const parts: React.ReactNode[] = [];
-        const regex = /(\*\*[^*]+\*\*|`[^`]+`)/g;
-        let last = 0;
-        let m: RegExpExecArray | null;
-        let i = 0;
-        while ((m = regex.exec(s)) !== null) {
-            if (m.index > last) parts.push(s.slice(last, m.index));
-            const tok = m[0];
-            if (tok.startsWith('**')) {
-                parts.push(<strong key={`${keyPrefix}-b${i}`}>{tok.slice(2, -2)}</strong>);
-            } else {
-                parts.push(
-                    <code
-                        key={`${keyPrefix}-c${i}`}
-                        style={{
-                            background: 'rgba(100,116,139,0.14)',
-                            padding: '0.1em 0.35em',
-                            borderRadius: '4px',
-                            fontSize: '0.88em',
-                        }}
-                    >
-                        {tok.slice(1, -1)}
-                    </code>,
-                );
-            }
-            last = m.index + tok.length;
-            i++;
-        }
-        if (last < s.length) parts.push(s.slice(last));
-        return parts;
-    };
-
-    return blocks.map((block, bi) => {
-        const lines = block.split('\n');
-        const isList = lines.every((l) => /^\s*[-*•]\s+/.test(l) || !l.trim());
-        if (isList && lines.some((l) => l.trim())) {
-            return (
-                <ul key={bi} style={{ margin: '0 0 0.6rem', paddingLeft: '1.1rem' }}>
-                    {lines
-                        .filter((l) => l.trim())
-                        .map((l, li) => (
-                            <li key={li} style={{ marginBottom: '0.25rem' }}>
-                                {inline(l.replace(/^\s*[-*•]\s+/, ''), `${bi}-${li}`)}
-                            </li>
-                        ))}
-                </ul>
-            );
-        }
-        return (
-            <p key={bi} style={{ margin: '0 0 0.6rem' }}>
-                {lines.map((l, li) => (
-                    <span key={li}>
-                        {inline(l, `${bi}-${li}`)}
-                        {li < lines.length - 1 && <br />}
-                    </span>
-                ))}
-            </p>
-        );
-    });
-}
 
 export default function AIAssistant() {
     const [isOpen, setIsOpen] = useState(false);
@@ -276,7 +211,7 @@ export default function AIAssistant() {
                             flex: 1,
                             overflowY: 'auto',
                             padding: '1rem',
-                            background: '#f8fafc',
+                            background: 'linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%)',
                         }}
                     >
                         {messages.map((m, i) => (
@@ -284,16 +219,46 @@ export default function AIAssistant() {
                                 key={i}
                                 style={{
                                     display: 'flex',
+                                    gap: '0.5rem',
+                                    alignItems: 'flex-start',
                                     justifyContent:
                                         m.role === 'user' ? 'flex-end' : 'flex-start',
-                                    marginBottom: '0.75rem',
+                                    marginBottom: '0.9rem',
+                                    animation: 'chatIn 0.32s ease both',
                                 }}
                             >
+                                {m.role === 'assistant' && (
+                                    <div
+                                        aria-hidden
+                                        style={{
+                                            flexShrink: 0,
+                                            width: '26px',
+                                            height: '26px',
+                                            borderRadius: '50%',
+                                            background:
+                                                'linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)',
+                                            color: 'white',
+                                            fontSize: '0.65rem',
+                                            fontWeight: 700,
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            marginTop: '2px',
+                                            letterSpacing: '0.3px',
+                                        }}
+                                    >
+                                        FA
+                                    </div>
+                                )}
                                 <div
                                     style={{
-                                        maxWidth: '88%',
-                                        padding: '0.7rem 0.9rem',
+                                        maxWidth: m.role === 'user' ? '86%' : '100%',
+                                        padding: '0.75rem 0.95rem',
                                         borderRadius: '14px',
+                                        boxShadow:
+                                            m.role === 'user'
+                                                ? '0 2px 10px rgba(99,102,241,0.25)'
+                                                : '0 1px 3px rgba(15,23,42,0.06)',
                                         borderBottomRightRadius:
                                             m.role === 'user' ? '4px' : '14px',
                                         borderBottomLeftRadius:
@@ -312,15 +277,17 @@ export default function AIAssistant() {
                                         wordBreak: 'break-word',
                                     }}
                                 >
-                                    {m.role === 'assistant'
-                                        ? renderText(m.content)
-                                        : m.content}
+                                    {m.role === 'assistant' ? (
+                                        <RichMessage text={m.content} />
+                                    ) : (
+                                        m.content
+                                    )}
                                 </div>
                             </div>
                         ))}
 
                         {isLoading && (
-                            <div style={{ display: 'flex', marginBottom: '0.75rem' }}>
+                            <div style={{ display: 'flex', marginBottom: '0.9rem', marginLeft: '34px' }}>
                                 <div
                                     style={{
                                         padding: '0.75rem 1rem',
@@ -355,7 +322,9 @@ export default function AIAssistant() {
                                     display: 'flex',
                                     flexWrap: 'wrap',
                                     gap: '0.4rem',
-                                    marginTop: '0.4rem',
+                                    marginTop: '0.5rem',
+                                    marginLeft: '34px',
+                                    animation: 'chatIn 0.4s ease both',
                                 }}
                             >
                                 {chips.map((c) => (
@@ -364,14 +333,24 @@ export default function AIAssistant() {
                                         onClick={() => send(c)}
                                         style={{
                                             background: 'white',
-                                            border: '1px solid var(--border)',
+                                            border: '1px solid rgba(99,102,241,0.3)',
                                             color: 'var(--primary)',
                                             borderRadius: '999px',
-                                            padding: '0.35rem 0.75rem',
+                                            padding: '0.35rem 0.8rem',
                                             fontSize: '0.78rem',
+                                            fontWeight: 500,
                                             cursor: 'pointer',
                                             lineHeight: 1.3,
                                             textAlign: 'left',
+                                            transition: 'all 0.18s ease',
+                                        }}
+                                        onMouseEnter={(e) => {
+                                            e.currentTarget.style.background = 'var(--primary)';
+                                            e.currentTarget.style.color = 'white';
+                                        }}
+                                        onMouseLeave={(e) => {
+                                            e.currentTarget.style.background = 'white';
+                                            e.currentTarget.style.color = 'var(--primary)';
                                         }}
                                     >
                                         {c}
@@ -447,6 +426,10 @@ export default function AIAssistant() {
             )}
 
             <style>{`
+                @keyframes chatIn {
+                    from { opacity: 0; transform: translateY(7px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
                 @keyframes chatDot {
                     0%, 60%, 100% { transform: translateY(0); opacity: 0.45; }
                     30% { transform: translateY(-5px); opacity: 1; }
