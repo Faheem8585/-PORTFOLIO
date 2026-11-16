@@ -209,3 +209,27 @@ Contributions, issues, and feature requests are welcome!
 ---
 
 **Note**: Remember to replace placeholder text, images, and personal information with your actual content!
+
+## Portfolio assistant
+
+The chat bubble is powered by `app/api/chat/route.ts` and the knowledge base in
+`lib/knowledge.ts`.
+
+It runs in two modes:
+
+**Without an API key.** The route scores the question against each section of
+the knowledge base and returns the best match. Always accurate, because every
+answer is text written in advance, but it cannot rephrase or combine sections.
+
+**With an API key.** Set `GEMINI_API_KEY` as an environment variable and the
+route sends the question to the model along with the whole knowledge base and a
+system prompt that forbids inventing anything. The assistant can then answer
+questions nobody anticipated, hold a conversation across turns, and give a
+balanced view on whether Faheem fits a specific role.
+
+Get a free key at aistudio.google.com/apikey. On Vercel, add it under
+Settings, Environment Variables, then redeploy. Groq, OpenRouter and OpenAI
+are supported too; see `.env.example`.
+
+To change what the assistant knows, edit `lib/knowledge.ts`. Both modes read
+from the same file.
