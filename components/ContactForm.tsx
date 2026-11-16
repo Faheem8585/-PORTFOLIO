@@ -10,19 +10,32 @@ export default function ContactForm() {
         subject: '',
         message: '',
     });
-    const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+    const [status, setStatus] = useState<'idle' | 'opened'>('idle');
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const ADDRESS = 'faheemarshad381999@icloud.com';
+
+    // No backend here, so the form composes the message and hands it to the
+    // sender's own mail client. That genuinely delivers, and the button says
+    // exactly what it does rather than claiming a send that never happened.
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        setStatus('submitting');
 
-        // Simulate form submission
-        // In production, you would integrate with a service like Formspree, Web3Forms, or a custom API
-        setTimeout(() => {
-            setStatus('success');
-            setFormData({ name: '', email: '', subject: '', message: '' });
-            setTimeout(() => setStatus('idle'), 3000);
-        }, 1000);
+        const subject = formData.subject.trim() || `Message from ${formData.name || 'your portfolio'}`;
+        const body = [
+            formData.message.trim(),
+            '',
+            '---',
+            `From: ${formData.name}`,
+            formData.email ? `Reply to: ${formData.email}` : '',
+            'Sent from portfolio-five-rouge-60.vercel.app',
+        ]
+            .filter(Boolean)
+            .join('\n');
+
+        window.location.href =
+            `mailto:${ADDRESS}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+        setStatus('opened');
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -95,14 +108,20 @@ export default function ContactForm() {
             </div>
 
             <Button type="submit" variant="primary" size="lg" className="w-full">
-                {status === 'submitting' ? 'Sending...' : 'Send Message'}
+                Open in your email app
             </Button>
 
-            {status === 'success' && (
-                <p className="text-green-600 text-center">Message sent successfully!</p>
-            )}
-            {status === 'error' && (
-                <p className="text-red-600 text-center">Failed to send message. Please try again.</p>
+            <p className="text-muted" style={{ fontSize: '0.84rem', textAlign: 'center', margin: 0 }}>
+                This opens your own email app with the message ready to send, so nothing is
+                stored here. You can also write to{' '}
+                <a href={`mailto:${ADDRESS}`}>{ADDRESS}</a> directly.
+            </p>
+
+            {status === 'opened' && (
+                <p style={{ textAlign: 'center', color: 'var(--signal-dim)', fontSize: '0.88rem', margin: 0 }}>
+                    Your email app should have opened. If nothing happened, write to{' '}
+                    <a href={`mailto:${ADDRESS}`}>{ADDRESS}</a> instead.
+                </p>
             )}
         </form>
     );
