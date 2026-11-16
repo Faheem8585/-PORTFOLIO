@@ -96,7 +96,7 @@ export default function Header() {
                     >
                         Research
                     </Link>
-                    <Link href="/contact" className="nav-cta">Get in touch</Link>
+                    <a href={href('contact')} className="nav-cta">Get in touch</a>
                 </nav>
 
                 <button
@@ -119,13 +119,13 @@ export default function Header() {
                         </a>
                     ))}
                     <Link href="/research" onClick={() => setMenuOpen(false)}>Research</Link>
-                    <Link
-                        href="/contact"
+                    <a
+                        href={href('contact')}
                         className="nav-cta"
                         onClick={() => setMenuOpen(false)}
                     >
                         Get in touch
-                    </Link>
+                    </a>
                 </div>
             )}
         </header>

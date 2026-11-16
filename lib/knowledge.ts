@@ -52,7 +52,7 @@ GitHub: github.com/Faheem8585
 
 He is based in Berlin and holds a valid German work permit, so there is no visa sponsorship requirement. He is open to machine learning and computer vision roles anywhere in Germany, and to doctoral positions.
 
-Email is the reliable way to reach him. The contact page has a form that composes the message and opens it in your own email app; it does not send anything by itself and nothing is stored on this site.`,
+Email is the way to reach him.`,
     },
     {
         id: 'education',
