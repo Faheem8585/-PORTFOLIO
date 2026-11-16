@@ -4,17 +4,28 @@ export default function Education() {
             degree: "Master of Science",
             field: "Artificial Intelligence",
             institution: "Brandenburgische Technische Universität Cottbus-Senftenberg",
-            period: "2023 - Nov 2025",
+            period: "Apr 2023 - Nov 2025",
             grade: "2.3",
-            location: "Cottbus, Germany"
+            location: "Cottbus, Germany",
+            notes: [
+                "Degree awarded 4 November 2025. Taught and examined entirely in English.",
+                "Research Module graded 1.0.",
+                "Thesis with Fraunhofer IFAM Dresden on electrode surface analysis.",
+                "Seven computational neuroscience modules, including Brain-Computer Interfaces for Neuroadaptive Technology, Neural Signal Processing, Modelling of Perception and Action, and Biological Neural Networks."
+            ]
         },
         {
             degree: "Bachelor of Science",
             field: "Computer Science",
             institution: "Riphah International University",
             period: "Sep 2018 - Aug 2022",
-            grade: "A+",
-            location: "Pakistan"
+            grade: "3.70 / 4.00",
+            location: "Islamabad, Pakistan",
+            notes: [
+                "Assessed as 1.4 on the German grading scale.",
+                "C++ was the primary language across the full degree: data structures, algorithms, object-oriented design and semester projects.",
+                "Thesis: Pak Charity, a Flutter and Firebase donation platform."
+            ]
         }
     ];
 
@@ -50,6 +61,13 @@ export default function Education() {
                                 </div>
                             </div>
                         </div>
+                        {edu.notes && (
+                            <ul>
+                                {edu.notes.map((note, i) => (
+                                    <li key={i}>{note}</li>
+                                ))}
+                            </ul>
+                        )}
                     </div>
                 ))}
             </div>

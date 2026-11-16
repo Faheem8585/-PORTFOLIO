@@ -1,6 +1,36 @@
 export default function Certifications() {
     const certifications = [
         {
+            title: "Systems Engineering with SysML",
+            issuer: "LinkedIn",
+            date: "Aug 2026",
+            skills: ["Systems Engineering", "SysML", "MBSE"]
+        },
+        {
+            title: "Statistics Foundations 3: Using Data Sets",
+            issuer: "LinkedIn",
+            date: "May 2026",
+            skills: ["Statistics", "Data Analysis"]
+        },
+        {
+            title: "Statistics Foundations 2: Probability",
+            issuer: "LinkedIn",
+            date: "May 2026",
+            skills: ["Statistics", "Probability"]
+        },
+        {
+            title: "Statistics Foundations 1: The Basics",
+            issuer: "LinkedIn / NASBA",
+            date: "Apr 2026",
+            skills: ["Statistics"]
+        },
+        {
+            title: "Machine Learning with Python: Foundations",
+            issuer: "LinkedIn",
+            date: "Apr 2026",
+            skills: ["Python", "Machine Learning"]
+        },
+        {
             title: "Power BI: Dashboards for Beginners",
             issuer: "LinkedIn",
             date: "Dec 2023",

@@ -39,6 +39,15 @@ export default function Skills() {
         { name: 'Data Analysis', proficiency: 85 },
         { name: 'Power BI', proficiency: 75 },
 
+        // LLM & RAG
+        { name: 'LangChain', proficiency: 80 },
+        { name: 'LangGraph', proficiency: 80 },
+        { name: 'ChromaDB', proficiency: 80 },
+        { name: 'Qdrant', proficiency: 75 },
+        { name: 'pgvector', proficiency: 75 },
+        { name: 'MCP Servers', proficiency: 80 },
+        { name: 'MONAI', proficiency: 80 },
+
         // Specialized Libraries
         { name: 'FilterPy', proficiency: 80 },
         { name: 'Streamlit', proficiency: 85 },
@@ -51,12 +60,18 @@ export default function Skills() {
         // DevOps & Tools
         { name: 'Git', proficiency: 85 },
         { name: 'GitHub', proficiency: 85 },
-        { name: 'Docker', proficiency: 70 },
+        { name: 'Docker', proficiency: 80 },
+        { name: 'Kubernetes / Helm', proficiency: 65 },
+        { name: 'FastAPI', proficiency: 85 },
+        { name: 'pytest', proficiency: 80 },
         { name: 'CI/CD', proficiency: 75 },
 
         // Cloud & Databases
         { name: 'AWS', proficiency: 70 },
         { name: 'Firebase', proficiency: 75 },
+        { name: 'PostgreSQL', proficiency: 80 },
+        { name: 'MongoDB', proficiency: 75 },
+        { name: 'TypeScript', proficiency: 75 },
     ];
 
     return (

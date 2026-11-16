@@ -32,8 +32,8 @@ export default function ContactPage() {
                                     </div>
                                     <div>
                                         <h3 className="font-semibold mb-1">Email</h3>
-                                        <a href="mailto:your.email@example.com" className="text-muted hover:text-primary">
-                                            your.email@example.com
+                                        <a href="mailto:faheemarshad381999@icloud.com" className="text-muted hover:text-primary">
+                                            faheemarshad381999@icloud.com
                                         </a>
                                     </div>
                                 </div>
@@ -47,12 +47,12 @@ export default function ContactPage() {
                                     <div>
                                         <h3 className="font-semibold mb-1">GitHub</h3>
                                         <a
-                                            href="https://github.com/yourusername"
+                                            href="https://github.com/Faheem8585"
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="text-muted hover:text-primary"
                                         >
-                                            github.com/yourusername
+                                            github.com/Faheem8585
                                         </a>
                                     </div>
                                 </div>
@@ -66,12 +66,12 @@ export default function ContactPage() {
                                     <div>
                                         <h3 className="font-semibold mb-1">LinkedIn</h3>
                                         <a
-                                            href="https://linkedin.com/in/yourusername"
+                                            href="https://www.linkedin.com/in/muhammadfaheemarshad99"
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="text-muted hover:text-primary"
                                         >
-                                            linkedin.com/in/yourusername
+                                            linkedin.com/in/muhammadfaheemarshad99
                                         </a>
                                     </div>
                                 </div>
@@ -80,8 +80,9 @@ export default function ContactPage() {
                             <div className="mt-8 p-6 bg-primary-light/20 border border-primary-light rounded-lg">
                                 <h3 className="font-semibold mb-2">Open to Opportunities</h3>
                                 <p className="text-sm text-muted">
-                                    Currently seeking PhD positions and research collaborations in machine learning
-                                    and computer vision. Available for consulting on data science projects.
+                                    Based in Berlin with a valid German work permit. Open to machine learning and computer
+                                    vision roles across Germany, and to doctoral positions in computer vision,
+                                    applied ML, or systems engineering.
                                 </p>
                             </div>
                         </div>

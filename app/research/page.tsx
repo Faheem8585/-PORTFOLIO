@@ -1,118 +1,136 @@
+import React from 'react';
 import { Metadata } from 'next';
 import Section from '@/components/ui/Section';
-import { Publication } from '@/lib/types';
 
 export const metadata: Metadata = {
-    title: 'Research & Publications | Portfolio',
-    description: 'Research work, publications, and academic contributions',
+    title: 'Research & Presentations | Portfolio',
+    description: 'Research work, conference presentations, and academic contributions',
 };
 
 export default function ResearchPage() {
-    // Sample publications - replace with actual data
-    const publications: Publication[] = [
-        // Add your publications here as they become available
+    const presentations = [
+        {
+            title: 'Invited research presentation',
+            venue: 'Institute for Software and Systems Engineering, TU Clausthal',
+            date: 'July 2026',
+            type: 'invited talk',
+            detail: 'Invited to present on human-in-the-loop system design to the software and systems engineering group.',
+        },
+        {
+            title: 'Poster presentation',
+            venue: 'dida Machine Learning Conference 2026, Berlin',
+            date: '2026',
+            type: 'poster',
+            detail: 'Presented applied machine learning work to an industry and research audience.',
+        },
+        {
+            title: 'Poster presentation and finalist',
+            venue: 'Decarbon Days 2026, Cottbus',
+            date: '2026',
+            type: 'poster',
+            detail: 'Selected as a finalist for work connected to decarbonisation and hydrogen technology.',
+        },
     ];
+
+    const areas = [
+        {
+            title: 'Scientific and Medical Image Analysis',
+            body: 'Segmentation and quantification on imaging data where the answer has to be measurable: electrode cross-sections, MicroCT volumes, hippocampus MRI, and videomicroscopy. The recurring theme is building a second, independent route to the same number so the first one can be checked.',
+        },
+        {
+            title: 'Validation and Honest Evaluation',
+            body: 'Most reported model performance is a validation score presented as a test score. My work puts effort into the distinction: simulators with known ground truth, held-out test splits reported separately, blind baselines that reveal when a model is reading a shortcut rather than the data.',
+        },
+        {
+            title: 'Human-in-the-Loop and Systems Engineering',
+            body: 'How automated components and human judgement share a task, and where the handover should sit. Presented on this at TU Clausthal and carried it into work on requirement extraction from procurement documents, where full automation is the wrong target.',
+        },
+        {
+            title: 'Retrieval-Augmented Generation on Technical Documents',
+            body: 'Hybrid retrieval over specialised corpora: CFD and OpenFOAM documentation, procurement tenders, internal company records. Dense and sparse retrieval combined, with the consolidation step treated as the hard part rather than an afterthought.',
+        },
+        {
+            title: 'Computational Neuroscience and Neural Signal Processing',
+            body: 'Three years of EEG acquisition and analysis in the Computational Neuroscience group at BTU, alongside seven taught modules including brain-computer interfaces, neural signal processing, and modelling of perception and action.',
+        },
+        {
+            title: 'Efficient Deep Learning on Constrained Hardware',
+            body: 'Several projects are built deliberately for CPU-only training and inference, using patch sampling, gradient accumulation and smaller backbones such as MobileNetV2, so the results can be reproduced without a GPU budget.',
+        },
+    ];
+
+    const cardStyle: React.CSSProperties = {
+        background: 'white',
+        padding: '1.5rem',
+        borderRadius: '12px',
+        border: '1px solid var(--border)',
+        marginBottom: '1.25rem',
+    };
 
     return (
         <>
-            <Section className="pt-32 pb-16">
-                <div className="max-w-4xl mx-auto">
-                    <h1 className="text-4xl md:text-5xl font-bold mb-6">Research & Publications</h1>
-                    <p className="text-xl text-muted mb-16">
-                        My research focuses on advancing computer vision and machine learning techniques
-                        with applications in healthcare, biology, and environmental sciences.
+            <Section>
+                <div>
+                    <h2>Research &amp; Presentations</h2>
+                    <p className="text-muted" style={{ fontSize: '1.05rem', lineHeight: '1.8', marginBottom: '2.5rem', maxWidth: '760px' }}>
+                        My research sits where computer vision meets measurement: problems in which a model
+                        has to produce a number somebody will act on, and the number has to be checkable.
                     </p>
 
-                    {/* Research Interests */}
-                    <div className="mb-16">
-                        <h2 className="text-2xl font-semibold mb-6">Research Areas</h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div className="p-6 bg-card-bg border border-card-border rounded-lg">
-                                <h3 className="font-semibold text-lg mb-2">Deep Learning Architectures</h3>
-                                <p className="text-sm text-muted">
-                                    Developing novel neural network architectures for improved performance
-                                    in object detection, segmentation, and classification tasks.
-                                </p>
+                    {/* Presentations */}
+                    <div style={{ marginBottom: '3rem' }}>
+                        <h3 style={{ marginBottom: '1.25rem' }}>Presentations</h3>
+                        {presentations.map((item, index) => (
+                            <div key={index} style={cardStyle}>
+                                <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'baseline', justifyContent: 'space-between', gap: '0.75rem', marginBottom: '0.4rem' }}>
+                                    <h4 style={{ margin: 0 }}>{item.title}</h4>
+                                    <span className="experience-date">{item.date}</span>
+                                </div>
+                                <p className="text-muted" style={{ fontWeight: 500, marginBottom: '0.4rem' }}>{item.venue}</p>
+                                <p className="text-muted" style={{ fontSize: '0.95rem', marginBottom: '0.9rem' }}>{item.detail}</p>
+                                <span className="skill-badge" style={{ fontSize: '0.78rem', padding: '0.25rem 0.75rem' }}>{item.type}</span>
                             </div>
-                            <div className="p-6 bg-card-bg border border-card-border rounded-lg">
-                                <h3 className="font-semibold text-lg mb-2">Medical Image Analysis</h3>
-                                <p className="text-sm text-muted">
-                                    Applying computer vision to medical imaging for automated diagnosis,
-                                    cell counting, and biological sample analysis.
-                                </p>
-                            </div>
-                            <div className="p-6 bg-card-bg border border-card-border rounded-lg">
-                                <h3 className="font-semibold text-lg mb-2">Real-time Detection Systems</h3>
-                                <p className="text-sm text-muted">
-                                    Building efficient algorithms for real-time object detection and tracking
-                                    in video streams with optimized inference pipelines.
-                                </p>
-                            </div>
-                            <div className="p-6 bg-card-bg border border-card-border rounded-lg">
-                                <h3 className="font-semibold text-lg mb-2">Physics-Informed ML</h3>
-                                <p className="text-sm text-muted">
-                                    Integrating physical principles and domain knowledge into machine learning
-                                    models for improved interpretability and performance.
-                                </p>
-                            </div>
+                        ))}
+                    </div>
+
+                    {/* Research Areas */}
+                    <div style={{ marginBottom: '3rem' }}>
+                        <h3 style={{ marginBottom: '1.25rem' }}>Research Areas</h3>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '1.25rem' }}>
+                            {areas.map((area, index) => (
+                                <div key={index} className="project-card" style={{ background: 'white', padding: '1.5rem', borderRadius: '12px', border: '1px solid var(--border)' }}>
+                                    <h4 style={{ marginBottom: '0.6rem' }}>{area.title}</h4>
+                                    <p className="text-muted" style={{ fontSize: '0.95rem', lineHeight: '1.7', margin: 0 }}>{area.body}</p>
+                                </div>
+                            ))}
                         </div>
                     </div>
 
-                    {/* Publications Section */}
-                    <div className="mb-16">
-                        <h2 className="text-2xl font-semibold mb-6">Publications</h2>
-                        {publications.length === 0 ? (
-                            <div className="p-8 bg-hover-bg/30 rounded-lg text-center">
-                                <p className="text-muted">
-                                    Publications and conference papers in preparation. Check back soon for updates.
-                                </p>
-                            </div>
-                        ) : (
-                            <div className="space-y-6">
-                                {publications.map((pub, index) => (
-                                    <div key={index} className="p-6 bg-card-bg border border-card-border rounded-lg">
-                                        <h3 className="font-semibold text-lg mb-2">{pub.title}</h3>
-                                        <p className="text-sm text-muted mb-2">
-                                            {pub.authors.join(', ')} • {pub.year}
-                                        </p>
-                                        <p className="text-sm mb-2">{pub.venue}</p>
-                                        <span className="inline-block px-2 py-1 text-xs bg-primary-light text-primary rounded">
-                                            {pub.type}
-                                        </span>
-                                        {pub.link && (
-                                            <a
-                                                href={pub.link}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="ml-4 text-sm text-primary hover:text-primary-dark"
-                                            >
-                                                View Paper →
-                                            </a>
-                                        )}
-                                    </div>
-                                ))}
-                            </div>
-                        )}
+                    {/* Doctoral candidacy */}
+                    <div style={{ marginBottom: '3rem' }}>
+                        <h3 style={{ marginBottom: '1.25rem' }}>Doctoral Applications</h3>
+                        <div style={cardStyle}>
+                            <p className="text-muted" style={{ fontSize: '0.98rem', lineHeight: '1.8', margin: 0 }}>
+                                In 2026 I was shortlisted to the final five of roughly 220 applicants for a
+                                doctoral position in model-based systems engineering at TU Clausthal, after
+                                five interview rounds including a presentation on human-in-the-loop system
+                                design. The position went to another candidate. I am actively seeking a
+                                doctoral position in computer vision, applied machine learning, or the
+                                intersection of the two with systems engineering.
+                            </p>
+                        </div>
                     </div>
 
-                    {/* Ongoing Projects */}
+                    {/* Publications */}
                     <div>
-                        <h2 className="text-2xl font-semibold mb-6">Ongoing Research</h2>
-                        <div className="space-y-4">
-                            <div className="p-6 bg-card-bg border border-card-border rounded-lg">
-                                <h3 className="font-semibold mb-2">Automated Biological Analysis</h3>
-                                <p className="text-sm text-muted">
-                                    Developing computer vision pipelines for automated analysis of biological samples,
-                                    including cell tracking, morphology analysis, and quantitative measurements.
-                                </p>
-                            </div>
-                            <div className="p-6 bg-card-bg border border-card-border rounded-lg">
-                                <h3 className="font-semibold mb-2">Fraud Detection Systems</h3>
-                                <p className="text-sm text-muted">
-                                    Machine learning approaches for detecting anomalous patterns in transaction data
-                                    with focus on interpretability and real-time performance.
-                                </p>
-                            </div>
+                        <h3 style={{ marginBottom: '1.25rem' }}>Publications</h3>
+                        <div style={cardStyle}>
+                            <p className="text-muted" style={{ fontSize: '0.98rem', lineHeight: '1.8', margin: 0 }}>
+                                Two manuscripts are in preparation. I have no peer-reviewed publications yet,
+                                and would rather say so plainly than pad this page. My written output so far
+                                is in the project repositories, where the method, the measured result and the
+                                known limitations are documented in full.
+                            </p>
                         </div>
                     </div>
                 </div>

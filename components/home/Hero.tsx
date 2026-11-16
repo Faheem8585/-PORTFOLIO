@@ -75,8 +75,8 @@ export default function Hero() {
                     lineHeight: '1.8',
                     animation: 'fadeInUp 0.8s ease-out'
                 }}>
-                    Building intelligent systems with Machine Learning, Computer Vision, and Data Science.
-                    Transforming complex problems into elegant solutions.
+                    Computer vision and machine learning engineer in Berlin. I build systems that produce a
+                    number someone will act on, and then I check whether the number is real.
                 </p>
                 <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
                     <a href="#projects" className="btn" style={{ animation: 'fadeInUp 1s ease-out' }}>
@@ -106,7 +106,7 @@ export default function Hero() {
                             backgroundClip: 'text',
                             animation: 'pulse 2s ease-in-out infinite'
                         }}>
-                            12+
+                            25
                         </div>
                         <div style={{ color: 'var(--muted)', fontSize: '0.9rem', fontWeight: 600 }}>Projects</div>
                     </div>
@@ -120,7 +120,7 @@ export default function Hero() {
                             backgroundClip: 'text',
                             animation: 'pulse 2s ease-in-out infinite 0.5s'
                         }}>
-                            24+
+                            40+
                         </div>
                         <div style={{ color: 'var(--muted)', fontSize: '0.9rem', fontWeight: 600 }}>Skills</div>
                     </div>
